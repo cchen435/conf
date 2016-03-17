@@ -1,0 +1,101 @@
+""" Setting for Vundle
+if filereadable(expand("~/.vimrc.bundles"))
+   	source ~/.vimrc.bundles
+endif
+
+" define shortcuts leader charater
+let mapleader=";"
+
+""" Setting for plugins installed by Vundle
+if filereadable(expand("~/.vimrc.plugin"))
+   	source ~/.vimrc.plugin
+endif
+
+
+" wrapmargin limits the columnes in a line 
+set wrapmargin=8
+
+" textwidth limites the number of characters in a line 
+set textwidth=80
+
+" auto indent, has for choices autoindent, smartindent, 
+" cindent, and indentexpr
+set cindent
+
+" syntax highlight
+syntax on 
+
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+
+" do indent according to file type
+filetype plugin indent on 
+
+
+" highlight selected line and column, and customize the color
+set cursorline
+hi CursorLine   cterm=NONE ctermbg=gray guibg=white
+set cursorcolumn
+"hi CursorLine   cterm=NONE ctermbg=black guibg=white
+"hi CursorColumn   cterm=NONE ctermbg=black guibg=white  
+"highlight ColorColumn ctermbg=black guibg=black
+
+" show line number
+set number
+
+" show status
+set laststatus=2
+
+" highlight search result 
+set hlsearch
+
+" code folder
+set foldmethod=syntax
+" using za to open and close current foldr and zM/zR to close/open all fodlers
+set nofoldenable
+
+set buftype:""
+
+
+" set the color scheme according to the time
+" user defined function must begin with capital character
+function SetColorScheme()
+    let time=strftime("%H")
+    if time < 6 + 0
+        let colorScheme = "delek"
+    elseif time < 12 + 0
+        let colorScheme = "morning"
+    elseif time < 18 + 0
+        let colorScheme = "default"
+    else
+        let colorScheme = "delek"
+    endif
+    execute "colorscheme " . colorScheme 
+endfunction 
+"call SetColorScheme()
+
+
+" adding copywrite info, this function also can be modified to adding some
+" common codes
+map <F4> :call TitleDet()<cr>'s
+autocmd BufNewFile *.py :call AddPyTitle()
+autocmd BufNewFile *.c :call AddCTitle()
+function AddPyTitle()
+    call append(0,"#!/usr/bin/env python")
+    call append(1,"# Copyright (c) Georgia Instituted of Technology")
+    call append(2,"# Author: C. Chen")
+    call append(3,"# Script functionality description")
+    call append(4,"# Create time: ".strftime("%Y-%m-%d %H:%M:%S"))
+    call append(5,"")
+endfunction
+function AddCTitle()
+    call append(0,"/**")
+    call append(1," * Copyright (c) Georgia Institute of Technology")
+    call append(2," * Author: C. Chen")
+    call append(3," * Functionality description of the file or projects")
+    call append(4," * Create time: ".strftime("%Y-%m-%d %H:%M:%S"))
+    call append(5," */")
+    call append(6," ")
+endfunction
+

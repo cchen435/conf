@@ -1,0 +1,17 @@
+
+""" Plugin related settings 
+" Indent Guides plugin configuration
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
+
+
+" setting theme as solarized 
+set background=dark
+if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+	let g:solarized_termcolors=256
+	let g:solarized_termtrans=1
+	let g:solarized_contrast="normal"
+	let g:solarized_visibility="normal"
+	color solarized             " Load a colorscheme
+endif
